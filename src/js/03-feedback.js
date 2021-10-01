@@ -14,7 +14,8 @@ const onInput = function () {
 
 const onSubmit = function (e) {
   e.preventDefault();
-  const parsedStorage = JSON.parse(localStorage.getItem('feedback-form-state'));
+  const parsedStorage = JSON.parse(localStorage.getItem('feedback-form-state')) ?? "Local storage is empty";
+  // localStorage.clear()
   localStorage.removeItem('feedback-form-state');
   formEl.reset();
   console.log(parsedStorage);
@@ -25,7 +26,7 @@ formEl.addEventListener('submit', onSubmit);
 window.onload = function () {
   const parsedStorage = JSON.parse(localStorage.getItem('feedback-form-state'));
 
-  if (parsedStorage === null) {
+  if (!parsedStorage) {
     emailEl.value = '';
     passwordEl.value = '';
   } else {
